@@ -11,7 +11,14 @@ module.exports=NodeHelper.create({
             json:true
         },(err,res,body)=>{
             if(err) callback("fail to connect runData");
-            callback(undefined,body);
+            else{
+                function cmp(a,b){
+                    return a.step<b.step;
+                }
+                body.sort(cmp);
+                callback(undefined,body);
+                console.log(body);
+            }
         })
     },
     socketNotificationReceived:function(notification,payload){
